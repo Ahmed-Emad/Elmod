@@ -45,10 +45,10 @@ public class MainActivity extends FragmentActivity {
         sharedPreferencesManager = sharedPreferencesManager.getInstance();
 
         choices = new ArrayList<>();
-        choices.add("   0   ");
-        choices.add("   1   ");
-        choices.add("   2   ");
-        choices.add("   3   ");
+        choices.add("0");
+        choices.add("1");
+        choices.add("2");
+        choices.add("3");
 
         sharedPreferencesManager.setKey(SharedMemory.LAST_SYNC_TIMESTAMP, 0L);
 
@@ -109,8 +109,13 @@ public class MainActivity extends FragmentActivity {
     public void setNewQuestion() {
         Random rand = new Random();
         int number = rand.nextInt(100);
-//        Collections.shuffle(choices);
-        Question question = new Question(number + "  %  4  =  ", choices, number % 4);
+        Collections.shuffle(choices);
+        for (int i = 0; i < 4; i++) {
+            if (Integer.parseInt(choices.get(i)) == number % 4) {
+                correctIndex = i;
+            }
+        }
+        Question question = new Question(number + "  %  4  =  ", choices, correctIndex);
         vm.showQuestion(question);
         correctIndex = question.getCorrectIndex();
 
