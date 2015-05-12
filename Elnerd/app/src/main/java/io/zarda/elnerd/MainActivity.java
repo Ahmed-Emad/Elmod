@@ -136,6 +136,7 @@ public class MainActivity extends FragmentActivity {
 
     public void answerClick(View v) {
         timer.cancel();
+        ++currentAllPlayed;
         int tag = Integer.parseInt((String)v.getTag());
         if (tag == correctIndex) {
             vm.showSuccess(correctIndex);

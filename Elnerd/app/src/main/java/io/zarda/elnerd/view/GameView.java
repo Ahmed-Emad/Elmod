@@ -12,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -154,19 +155,14 @@ public class GameView implements Viewable, Game {
         correctButton.setRightIcon("fa-check");
         correctButton.setLeftIcon("fa-check");
 
-
-        CountDownTimer timer = new CountDownTimer(1000, 500) {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
-            public void onTick(long millisUntilFinished) {
-                System.out.println("seconds remaining: " + (double) millisUntilFinished / 1000);
-            }
-
-            @Override
-            public void onFinish() {
+            public void run() {
                 gvn.notifyShowSuccessFinished();
             }
-        };
-        timer.start();
+        }, 800);
+
 
         // mainLayout.
 //        if (!correctImage.isShown() && !wrongImage.isShown()) {
@@ -207,18 +203,13 @@ public class GameView implements Viewable, Game {
         correctButton.setRightIcon("fa-check");
         correctButton.setLeftIcon("fa-check");
 
-        CountDownTimer timer = new CountDownTimer(1000, 500) {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
-            public void onTick(long millisUntilFinished) {
-                System.out.println("seconds remaining: " + (double) millisUntilFinished / 1000);
-            }
-
-            @Override
-            public void onFinish() {
+            public void run() {
                 gvn.notifyShowFailureFinished();
             }
-        };
-        timer.start();
+        }, 800);
 
     }
 
