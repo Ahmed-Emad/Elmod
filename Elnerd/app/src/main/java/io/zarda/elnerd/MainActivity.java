@@ -21,6 +21,7 @@ import io.zarda.elnerd.src.ViewManager;
 
 public class MainActivity extends FragmentActivity {
 
+    ArrayList<String> choices;
     private SharedPreferencesManager sharedPreferencesManager;
     private CountDownTimer timer;
     private ViewManager vm;
@@ -29,8 +30,6 @@ public class MainActivity extends FragmentActivity {
     private int lastAllPlayed;
     private int currentLongestPlayed;
     private int currentAllPlayed;
-
-    ArrayList<String> choices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +61,7 @@ public class MainActivity extends FragmentActivity {
         vm = new ViewManager(this);
         vm.startHomeView();
 
+        setContentView(R.layout.activity_home);
     }
 
     @Override
@@ -136,28 +136,19 @@ public class MainActivity extends FragmentActivity {
 
     public void answerClick(View v) {
         timer.cancel();
-        if ((int) v.getTag() == correctIndex) {
+        int tag = Integer.parseInt((String)v.getTag());
+        if (tag == correctIndex) {
             vm.showSuccess(correctIndex);
             ++currentLongestPlayed;
         } else {
-            vm.showFailure(correctIndex, (int) v.getTag());
+            vm.showFailure(correctIndex, tag);
         }
     }
 
     public void playClick(View v) {
         currentLongestPlayed = 0;
         vm.endHomeView();
-//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
-//        startActivity(browserIntent);
-//        Intent browserIntent = new Intent(this, WebViewActivity.class);
-//        startActivity(browserIntent);
     }
-
-//    public void loginClick(View v) {
-//        FragmentTransaction transaction = mFragmentManager.beginTransaction();
-//        transaction.replace(android.R.id.content, new FragmentSimpleLoginButton());
-//        transaction.commit();
-//    }
 
     public void updatePreferences() {
         if (currentLongestPlayed > lastLongestPlayed) {
@@ -181,7 +172,6 @@ public class MainActivity extends FragmentActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
 }

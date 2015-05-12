@@ -41,41 +41,41 @@ public class HomeView implements Viewable {
     TextView transitionView;
     int bitmapWidth;
     int bitmapHeight;
+    HomeViewNotifier hvn;
     private Context context;
     private FrameLayout mainLayout;
     private TableLayout layout;
     private Bitmap backgroundBitmap;
     private Button playButton;
     private TextView bestScore;
-    private TextView allPlayed;
 //    private Button facebook;
+    private TextView allPlayed;
 
-    HomeViewNotifier hvn;
-
-    public HomeView(HomeViewNotifier hvn){
+    public HomeView(HomeViewNotifier hvn) {
         this.hvn = hvn;
     }
 
 
     @Override
-    public void initializeView(Context context , List<View> views) {
+    public void initializeView(Context context, List<View> views) {
         this.context = context;
-        playButton = (Button) views.get(0);
-        bestScore = (TextView) views.get(1);
-        allPlayed = (TextView) views.get(2);
-//        facebook = (Button) views.get(3);
-
-        setScreenDimention();
-        setMainLayout();
+//        playButton = (Button) views.get(0);
+//        bestScore = (TextView) views.get(1);
+//        allPlayed = (TextView) views.get(2);
+////        facebook = (Button) views.get(3);
+//
+//        setScreenDimention();
+//        setMainLayout();
     }
 
     @Override
     public void startView() {
-        Animation transitionSet = new AlphaAnimation(0, 0);
-        transitionSet.setFillAfter(true);
-        transitionView.setAnimation(transitionSet);
-        ((Activity)context).setContentView(mainLayout);
-        loadBitmap(R.drawable.bgim, backgroundBitmap);
+//        Animation transitionSet = new AlphaAnimation(0, 0);
+//        transitionSet.setFillAfter(true);
+//        transitionView.setAnimation(transitionSet);
+//        ((Activity) context).setContentView(mainLayout);
+//        loadBitmap(R.drawable.bgim, backgroundBitmap);
+        ((Activity) context).setContentView(R.layout.activity_home);
 
 
     }
@@ -86,11 +86,9 @@ public class HomeView implements Viewable {
 //        ((ViewGroup) mainLayout.getParent()).removeAllViews();
 //        goAway();
         hvn.notifyHomeAnimationFinished();
-
-
     }
 
-    private void setScreenDimention(){
+    private void setScreenDimention() {
         Display screen = ((Activity) context).getWindowManager().getDefaultDisplay();
         Point size = new Point();
         screen.getSize(size);
@@ -98,7 +96,7 @@ public class HomeView implements Viewable {
         screenHeight = size.y;
     }
 
-    private void setMainLayout(){
+    private void setMainLayout() {
         mainLayout = new FrameLayout(context);
         bitmapHeight = screenHeight;
         bitmapWidth = screenWidth;
@@ -115,7 +113,7 @@ public class HomeView implements Viewable {
         mainLayout.addView(relativeLayout1);
     }
 
-    private TableLayout setLayoutComponents(){
+    private TableLayout setLayoutComponents() {
         layout = new TableLayout(context);
         LinearLayout firstRow = new LinearLayout(context);
         firstRow.addView(playButtonView());
@@ -135,14 +133,14 @@ public class HomeView implements Viewable {
         return layout;
     }
 
-    private TextView bestScoreView(){
+    private TextView bestScoreView() {
 //        TO-DO
         bestScore.setTypeface(Typeface.createFromAsset(context.getAssets(),
                 "fonts/Roboto-ThinItalic.ttf"));
         bestScore.setTextColor(Color.parseColor("#e5e6c9"));
         bestScore.setText("50");
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT , ViewGroup.LayoutParams.WRAP_CONTENT);
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.width = 350;
         params.height = 150;
         bestScore.setLayoutParams(params);
@@ -153,14 +151,14 @@ public class HomeView implements Viewable {
         return bestScore;
     }
 
-    private TextView allPlayedView(){
+    private TextView allPlayedView() {
 //        TO-DO
         allPlayed.setTypeface(Typeface.createFromAsset(context.getAssets(),
                 "fonts/Roboto-ThinItalic.ttf"));
         allPlayed.setTextColor(Color.parseColor("#e5e6c9"));
-        allPlayed.setText(bestScore.getText().toString().replace("Best:" , " "));
+        allPlayed.setText(bestScore.getText().toString().replace("Best:", " "));
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT , ViewGroup.LayoutParams.WRAP_CONTENT);
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.width = 350;
         params.height = 150;
         params.setMargins(-20, 0, 0, 0);
@@ -172,10 +170,10 @@ public class HomeView implements Viewable {
         return allPlayed;
     }
 
-    private Button playButtonView(){
+    private Button playButtonView() {
         playButton.setBackground(context.getResources().getDrawable(R.drawable.playbutton));
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT , ViewGroup.LayoutParams.WRAP_CONTENT);
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.width = 300;
         params.height = 300;
         params.setMargins(0, 520, 0, 50);
@@ -313,7 +311,7 @@ public class HomeView implements Viewable {
         return inSampleSize;
     }
 
-    public void loadBitmap(int resId , Bitmap bitmap) {
+    public void loadBitmap(int resId, Bitmap bitmap) {
         BitmapWorkerTask task = new BitmapWorkerTask();
         task.execute(resId);
     }
@@ -329,7 +327,7 @@ public class HomeView implements Viewable {
         protected Bitmap doInBackground(Integer... params) {
             data = params[0];
             return decodeSampledBitmapFromResource(context.getResources(), data, 500,
-                    500 );
+                    500);
         }
 
         // Once complete, see if ImageView is still around and set bitmap.

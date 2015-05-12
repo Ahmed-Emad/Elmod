@@ -11,6 +11,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -28,6 +29,8 @@ import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +43,7 @@ import io.zarda.elnerd.src.GameViewNotifier;
  * Created by atef & emad on 4 May, 2015.
  * Implementing by magdy.
  */
-public class GameView implements Viewable , Game{
+public class GameView implements Viewable, Game {
     Context context;
 
     int screenWidth;
@@ -64,7 +67,7 @@ public class GameView implements Viewable , Game{
 
     AnimationSet reponseAnimation;
 
-    int [] colors = {R.drawable.display , R.drawable.display1 , R.drawable.display2 ,
+    int[] colors = {R.drawable.display, R.drawable.display1, R.drawable.display2,
             R.drawable.display3};
 
     RelativeLayout displayLayout;
@@ -75,60 +78,62 @@ public class GameView implements Viewable , Game{
     Button thirdChoice;
     Button forthChoice;
 
-    ArrayList <TextView> cards = new ArrayList<TextView>();
+    ArrayList<TextView> cards = new ArrayList<TextView>();
     GameViewNotifier gvn;
     private float degree = 0;
     private int randomIndex = 0;
 
-    public GameView(GameViewNotifier gvn){
+    public GameView(GameViewNotifier gvn) {
         this.gvn = gvn;
     }
 
     @Override
-    public void initializeView(Context context , List<View> views) {
+    public void initializeView(Context context, List<View> views) {
         this.context = context;
-        cardMain = (TextView) views.get(0);
-        firstChoice = (Button) views.get(1);
-        secondChoice = (Button) views.get(2);
-        thirdChoice = (Button) views.get(3);
-        forthChoice = (Button) views.get(4);
-
-        bar = new View(context);
-        barBackground = new View(context);
-
-        barLayout = new RelativeLayout(context);
-        barBackground.setBackgroundColor(Color.DKGRAY);
-        barBackground.setMinimumWidth(screenWidth);
-        bar.setBackgroundColor(Color.GRAY);
-        bar.setMinimumWidth(screenWidth);
-        barLayout.addView(barBackground);
-        barLayout.addView(bar);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT , ViewGroup.LayoutParams.WRAP_CONTENT);
-        setDimension();
-        params.height = 50;
-        params.width = screenWidth;
-        barLayout.setLayoutParams(params);
+//        cardMain = (TextView) views.get(0);
+//        firstChoice = (Button) views.get(1);
+//        secondChoice = (Button) views.get(2);
+//        thirdChoice = (Button) views.get(3);
+//        forthChoice = (Button) views.get(4);
+//
+//        bar = new View(context);
+//        barBackground = new View(context);
+//
+//        barLayout = new RelativeLayout(context);
+//        barBackground.setBackgroundColor(Color.DKGRAY);
+//        barBackground.setMinimumWidth(screenWidth);
+//        bar.setBackgroundColor(Color.GRAY);
+//        bar.setMinimumWidth(screenWidth);
+//        barLayout.addView(barBackground);
+//        barLayout.addView(bar);
+//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+//                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        setDimension();
+//        params.height = 50;
+//        params.width = screenWidth;
+//        barLayout.setLayoutParams(params);
     }
 
     @Override
     public void startView() {
 //        mainLayout.addView(layout);
 
-        setLayout();
-        setDisplayLayout();
-        setButtons();
+//        setLayout();
+//        setDisplayLayout();
+//        setButtons();
+//
+//        timeAnimation();
+//
+//
+//        setBitmapsAndAnimation();
+////        ((Activity) context).setContentView(mainLayout);
+//        buttonsInAnimation(0);
 
-        timeAnimation();
-
-
-        setBitmapsAndAnimation();
-//        ((Activity) context).setContentView(mainLayout);
-        buttonsInAnimation(0);
+        ((Activity) context).setContentView(R.layout.activity_game);
     }
 
     @Override
-    public void setTime(int time){
+    public void setTime(int time) {
         this.time = time;
     }
 
@@ -136,16 +141,32 @@ public class GameView implements Viewable , Game{
     public void endView() {
 //        layout.removeAllViews();
 //        ((ViewGroup) mainLayout.getParent()).removeAllViews();
-        layout.removeAllViews();
-        mainLayout.removeAllViews();
+//        layout.removeAllViews();
+//        mainLayout.removeAllViews();
     }
 
     @Override
-    public void showSuccess(final Button correctButton) {
-        correctButton.setBackground(context.getResources().getDrawable(R.drawable.correctbtn));
-        buttonsOutAnimation(true);
-        correctImage.startAnimation(reponseAnimation);
-        gvn.notifyShowSuccessFinished();
+    public void showSuccess(BootstrapButton correctButton) {
+//        correctButton.setBackground(context.getResources().getDrawable(R.drawable.correctbtn));
+//        buttonsOutAnimation(true);
+//        correctImage.startAnimation(reponseAnimation);
+        correctButton.setBootstrapType("success");
+        correctButton.setRightIcon("fa-check");
+        correctButton.setLeftIcon("fa-check");
+
+
+        CountDownTimer timer = new CountDownTimer(1000, 500) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                System.out.println("seconds remaining: " + (double) millisUntilFinished / 1000);
+            }
+
+            @Override
+            public void onFinish() {
+                gvn.notifyShowSuccessFinished();
+            }
+        };
+        timer.start();
 
         // mainLayout.
 //        if (!correctImage.isShown() && !wrongImage.isShown()) {
@@ -176,10 +197,29 @@ public class GameView implements Viewable , Game{
     }
 
     @Override
-    public void showFailure(Button correctButton, Button wrongButton) {
+    public void showFailure(BootstrapButton correctButton, BootstrapButton wrongButton) {
 
-        wrongButton.setBackground(context.getResources().getDrawable(R.drawable.wrongbtn));
-        gvn.notifyShowFailureFinished();
+        wrongButton.setBootstrapType("danger");
+        wrongButton.setRightIcon("fa-times");
+        wrongButton.setLeftIcon("fa-times");
+
+        correctButton.setBootstrapType("success");
+        correctButton.setRightIcon("fa-check");
+        correctButton.setLeftIcon("fa-check");
+
+        CountDownTimer timer = new CountDownTimer(1000, 500) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                System.out.println("seconds remaining: " + (double) millisUntilFinished / 1000);
+            }
+
+            @Override
+            public void onFinish() {
+                gvn.notifyShowFailureFinished();
+            }
+        };
+        timer.start();
+
     }
 
     @Override
@@ -187,27 +227,27 @@ public class GameView implements Viewable , Game{
         newQuestion();
     }
 
-    private void setBitmapsAndAnimation(){
+    private void setBitmapsAndAnimation() {
         correctImage = new ImageView(context);
         mainLayout.addView(correctImage);
-        Animation setAnimation = new ScaleAnimation(0 ,0 ,0 ,0);
+        Animation setAnimation = new ScaleAnimation(0, 0, 0, 0);
         setAnimation.setFillAfter(true);
         correctImage.startAnimation(setAnimation);
-        correctImage.setLayerType(View.LAYER_TYPE_HARDWARE , null);
+        correctImage.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         correctImage.setImageBitmap(correctBitmap);
         FrameLayout.LayoutParams correctParams = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.WRAP_CONTENT , FrameLayout.LayoutParams.WRAP_CONTENT);
+                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 
 
         correctParams.height = screenWidth;
         correctParams.width = screenWidth;
 
         correctImage.setLayoutParams(correctParams);
-        Animation fadeAnimation = new AlphaAnimation(0.9f , 0.0f);
+        Animation fadeAnimation = new AlphaAnimation(0.9f, 0.0f);
         fadeAnimation.setDuration(1000);
 
-        Animation scaleAnimation = new ScaleAnimation(0.25f , 1f , 0.25f , 1f ,
-                screenWidth/2 , screenHeight/2);
+        Animation scaleAnimation = new ScaleAnimation(0.25f, 1f, 0.25f, 1f,
+                screenWidth / 2, screenHeight / 2);
         scaleAnimation.setDuration(1000);
 
         reponseAnimation = new AnimationSet(false);
@@ -217,9 +257,9 @@ public class GameView implements Viewable , Game{
         reponseAnimation.setFillAfter(true);
     }
 
-    private void setLayout(){
+    private void setLayout() {
         layout = new TableLayout(context);
-        if(!barLayout.isShown()){
+        if (!barLayout.isShown()) {
 
             layout.addView(barLayout);
         }
@@ -228,25 +268,25 @@ public class GameView implements Viewable , Game{
         loadBitmap(R.drawable.gpbg, bitmap);
 
         mainLayout = new FrameLayout(context);
-        if(!layout.isShown()){
+        if (!layout.isShown()) {
 
             mainLayout.addView(layout);
         }
     }
 
-    private void setDisplayLayout(){
+    private void setDisplayLayout() {
         displayLayout = new RelativeLayout(context);
         RelativeLayout.LayoutParams displayParams = new RelativeLayout.LayoutParams(
                 TableLayout.LayoutParams.WRAP_CONTENT,
                 TableLayout.LayoutParams.WRAP_CONTENT);
         displayParams.width = screenWidth;
-        displayParams.height = (int)(screenHeight * 0.5);
+        displayParams.height = (int) (screenHeight * 0.5);
         displayLayout.setLayoutParams(displayParams);
         displayLayout.setGravity(Gravity.CENTER_HORIZONTAL);
         layout.addView(displayLayout);
     }
 
-    private void setDimension(){
+    private void setDimension() {
         Display screen = ((Activity) context).getWindowManager().getDefaultDisplay();
         Point size = new Point();
         screen.getSize(size);
@@ -254,12 +294,12 @@ public class GameView implements Viewable , Game{
         this.screenHeight = size.y;
     }
 
-    private void setButtons(){
+    private void setButtons() {
         TableLayout.LayoutParams params = new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.WRAP_CONTENT,
                 TableLayout.LayoutParams.WRAP_CONTENT);
 
-        params.setMargins(20 ,20 ,20 ,20);
+        params.setMargins(20, 20, 20, 20);
 
         firstChoice.setLayoutParams(params);
         secondChoice.setLayoutParams(params);
@@ -267,13 +307,13 @@ public class GameView implements Viewable , Game{
         forthChoice.setLayoutParams(params);
 
         firstChoice.setTypeface(Typeface.createFromAsset(
-                context.getAssets() ,"fonts/DroidKufi-Regular.ttf"));
+                context.getAssets(), "fonts/DroidKufi-Regular.ttf"));
         secondChoice.setTypeface(Typeface.createFromAsset(
-                context.getAssets() ,"fonts/DroidKufi-Regular.ttf"));
+                context.getAssets(), "fonts/DroidKufi-Regular.ttf"));
         thirdChoice.setTypeface(Typeface.createFromAsset(
-                context.getAssets() ,"fonts/DroidKufi-Regular.ttf"));
+                context.getAssets(), "fonts/DroidKufi-Regular.ttf"));
         forthChoice.setTypeface(Typeface.createFromAsset(
-                context.getAssets() ,"fonts/DroidKufi-Regular.ttf"));
+                context.getAssets(), "fonts/DroidKufi-Regular.ttf"));
 
         setButtonsDefaultColorAndTextColor();
 
@@ -285,7 +325,7 @@ public class GameView implements Viewable , Game{
 
     }
 
-    private void setButtonsDefaultColorAndTextColor(){
+    private void setButtonsDefaultColorAndTextColor() {
         firstChoice.setBackground(context.getResources().getDrawable(R.drawable.btn));
         secondChoice.setBackground(context.getResources().getDrawable(R.drawable.btn));
         thirdChoice.setBackground(context.getResources().getDrawable(R.drawable.btn));
@@ -296,44 +336,44 @@ public class GameView implements Viewable , Game{
         forthChoice.setTextColor(Color.parseColor("#ecf0f1"));
     }
 
-    private void buttonsInAnimation(int delay){
+    private void buttonsInAnimation(int delay) {
         firstChoice.startAnimation(fromRight(0 + delay));
         secondChoice.startAnimation(fromRight(75 + delay));
         thirdChoice.startAnimation(fromRight(150 + delay));
         forthChoice.startAnimation(fromRight(225 + delay));
     }
 
-    private void buttonsOutAnimation(final boolean answer){
+    private void buttonsOutAnimation(final boolean answer) {
         forthChoice.startAnimation(toLeft(0));
         thirdChoice.startAnimation(toLeft(75));
         secondChoice.startAnimation(toLeft(150));
         firstChoice.startAnimation(toLeft(225));
     }
 
-    private void getRandomIndex(int x){
+    private void getRandomIndex(int x) {
         Random random = new Random();
         int randomValue = random.nextInt(x);
-        while (randomValue == randomIndex){
+        while (randomValue == randomIndex) {
             randomValue = random.nextInt(x);
         }
-        randomIndex =  randomValue;
+        randomIndex = randomValue;
     }
 
-    private void getRandomDegree(float x){
+    private void getRandomDegree(float x) {
         Random random = new Random();
         float randomDegree = random.nextFloat() * x - (x / 2);
-        while(randomDegree == degree){
+        while (randomDegree == degree) {
             randomDegree = random.nextFloat() * x - (x / 2);
         }
         degree = randomDegree;
     }
 
-    private void addCard(){
-        if(cards.size() == 5){
+    private void addCard() {
+        if (cards.size() == 5) {
             displayLayout.removeView(cards.get(0));
             cards.remove(0);
         }
-        System.out.println("cards no : "+ cards.size());
+        System.out.println("cards no : " + cards.size());
         TextView card = new Button(context);
         cards.add(card);
         card.setText(cardMain.getText());
@@ -353,11 +393,11 @@ public class GameView implements Viewable , Game{
 
         AnimationSet dropAnimation = new AnimationSet(false);
 
-        Animation rotateAnimation = new RotateAnimation(0.0f , degree , screenWidth/2 ,
-                screenHeight/4);
+        Animation rotateAnimation = new RotateAnimation(0.0f, degree, screenWidth / 2,
+                screenHeight / 4);
         rotateAnimation.setDuration(100);
 
-        Animation scaleAnimation = new ScaleAnimation(1.0f , 0.85f , 1f , 0.7f , screenWidth / 2 ,
+        Animation scaleAnimation = new ScaleAnimation(1.0f, 0.85f, 1f, 0.7f, screenWidth / 2,
                 screenHeight / 4);
         scaleAnimation.setDuration(100);
 
@@ -372,21 +412,21 @@ public class GameView implements Viewable , Game{
         timeAnimation();
     }
 
-    private void newQuestion(){
+    private void newQuestion() {
         addCard();
         setButtonsDefaultColorAndTextColor();
     }
 
-    private Animation fromRight(int delay){
-        Animation fromRight = new TranslateAnimation(screenWidth , 10 , 0 , 0);
+    private Animation fromRight(int delay) {
+        Animation fromRight = new TranslateAnimation(screenWidth, 10, 0, 0);
         fromRight.setDuration(100);
         fromRight.setStartOffset(delay);
 
         return fromRight;
     }
 
-    private Animation toLeft(int delay){
-        Animation toLeft = new TranslateAnimation(0 , -2*screenWidth - 20 , 0 , 0);
+    private Animation toLeft(int delay) {
+        Animation toLeft = new TranslateAnimation(0, -2 * screenWidth - 20, 0, 0);
         toLeft.setDuration(100);
         toLeft.setStartOffset(delay);
         toLeft.setFillAfter(true);
@@ -394,8 +434,8 @@ public class GameView implements Viewable , Game{
         return toLeft;
     }
 
-    private void timeAnimation(){
-        Animation move = new TranslateAnimation(0 , -screenWidth , 0 , 0);
+    private void timeAnimation() {
+        Animation move = new TranslateAnimation(0, -screenWidth, 0, 0);
         move.setDuration(time);
         bar.startAnimation(move);
     }
