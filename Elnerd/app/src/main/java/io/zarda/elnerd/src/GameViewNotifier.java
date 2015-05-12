@@ -16,7 +16,7 @@ public class GameViewNotifier {
 
     public void notifyShowSuccessFinished() {
         vm.endGameView();
-        vm.startQuoteView();
+        vm.startGameView();
     }
 
     public void notifyShowFailureFinished() {

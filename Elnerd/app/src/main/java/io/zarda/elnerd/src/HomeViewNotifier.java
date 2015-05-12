@@ -14,8 +14,7 @@ public class HomeViewNotifier {
     }
 
     public void notifyHomeAnimationFinished() {
-        System.out.println("AAAAAAAA");
-        vm.startQuoteView();
+        vm.startGameView();
     }
 
 }

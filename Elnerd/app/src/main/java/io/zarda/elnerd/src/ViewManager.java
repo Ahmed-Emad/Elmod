@@ -1,7 +1,6 @@
 package io.zarda.elnerd.src;
 
 import android.content.Context;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,10 +14,8 @@ import java.util.List;
 import io.zarda.elnerd.MainActivity;
 import io.zarda.elnerd.R;
 import io.zarda.elnerd.model.Question;
-import io.zarda.elnerd.model.Quote;
 import io.zarda.elnerd.view.GameView;
 import io.zarda.elnerd.view.HomeView;
-import io.zarda.elnerd.view.QuoteView;
 import io.zarda.elnerd.view.Viewable;
 
 /**
@@ -29,13 +26,11 @@ public class ViewManager {
 
     private final List<View> gameViewsList;
     private final List<View> homeViewsList;
-    private final List<View> quoteViewsList;
 
     GameViewNotifier gvn;
     HomeViewNotifier hvn;
 
     HomeView homeView;
-    QuoteView quoteView;
     GameView gameView;
 
     Viewable currentView;
@@ -61,20 +56,8 @@ public class ViewManager {
         homeViewsArray.add(new TextView(context));
         homeViewsArray.add(new TextView(context));
 
-        LoginButton mButtonLogin = new LoginButton(context);
-        mButtonLogin.setId(R.id.login_button);
-        homeViewsArray.add(mButtonLogin);
-
-
         homeViewsList = Collections.unmodifiableList(homeViewsArray);
 
-
-        // quoteView
-        ArrayList<View> quoteViewsArray = new ArrayList<>();
-        quoteViewsArray.add(new TextView(context));
-        quoteViewsArray.add(new TextView(context));
-
-        quoteViewsList = Collections.unmodifiableList(quoteViewsArray);
 
         // game View
         ArrayList<View> gameViewsArray = new ArrayList<>();
@@ -100,9 +83,6 @@ public class ViewManager {
 
         gameView = new GameView(gvn);
         gameView.initializeView(context, gameViewsList);
-
-        quoteView = new QuoteView();
-        quoteView.initializeView(context, quoteViewsList);
     }
 
     public void startHomeView() {
@@ -154,44 +134,8 @@ public class ViewManager {
                 (Button) gameViewsList.get(clickedButtonIndex + 1));
     }
 
-    public void startQuoteView() {
-        quoteView.startView();
-        quoteView.setTime(9000);
-        ((MainActivity) context).setNewQuote();
-        currentView = quoteView;
-        CountDownTimer timer = new CountDownTimer(9000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                System.out.println("seconds remaining: " + (double) millisUntilFinished / 1000);
-            }
-
-            @Override
-            public void onFinish() {
-                endQuoteView();
-                startGameView();
-            }
-        };
-        timer.start();
-    }
-
-    public void endQuoteView() {
-        quoteView.endView();
-        currentView = null;
-    }
-
-    public void showQuote(Quote quote) {
-        ((TextView) quoteViewsList.get(0)).setText(quote.getContent());
-        ((TextView) quoteViewsList.get(1)).setText(quote.getBook());
-        quoteView.showQuote();
-    }
-
-
     public boolean inHome() {
         return currentView == homeView;
-    }
-
-    public boolean inQuote() {
-        return currentView == quoteView;
     }
 
 }

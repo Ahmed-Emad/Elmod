@@ -48,7 +48,7 @@ public class HomeView implements Viewable {
     private Button playButton;
     private TextView bestScore;
     private TextView allPlayed;
-    private Button facebook;
+//    private Button facebook;
 
     HomeViewNotifier hvn;
 
@@ -63,7 +63,7 @@ public class HomeView implements Viewable {
         playButton = (Button) views.get(0);
         bestScore = (TextView) views.get(1);
         allPlayed = (TextView) views.get(2);
-        facebook = (Button) views.get(3);
+//        facebook = (Button) views.get(3);
 
         setScreenDimention();
         setMainLayout();
@@ -130,7 +130,7 @@ public class HomeView implements Viewable {
         forthRow.setGravity(Gravity.CENTER);
         forthRow.setPadding(0, 200, 0, 200);
         layout.addView(forthRow);
-        layout.addView(facebookView());
+//        layout.addView(facebookView());
         layout.setGravity(Gravity.CENTER_HORIZONTAL);
         return layout;
     }
@@ -188,18 +188,18 @@ public class HomeView implements Viewable {
         return playButton;
     }
 
-    private Button facebookView(){
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        facebook.setLayoutParams(params);
-        return facebook;
-    }
+//    private Button facebookView(){
+//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+//                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        facebook.setLayoutParams(params);
+//        return facebook;
+//    }
 
     private void goAway() {
         playButtonGOAnimation();
         bestScoreGoAnimation();
         allPlayedGoAnimation();
-        facebookGoAnimation();
+//        facebookGoAnimation();
         screenUP();
 //        transitionView.getAnimation().setAnimationListener(new Animation.AnimationListener() {
 //            @Override
@@ -242,12 +242,12 @@ public class HomeView implements Viewable {
         allPlayed.startAnimation(allPlayedGo);
     }
 
-    private void facebookGoAnimation() {
-        Animation facebookGo = new TranslateAnimation(0, 0, 0, 2 * screenHeight);
-        facebookGo.setDuration(2000);
-//        facebookGo.setFillAfter(true);
-        facebook.startAnimation(facebookGo);
-    }
+//    private void facebookGoAnimation() {
+//        Animation facebookGo = new TranslateAnimation(0, 0, 0, 2 * screenHeight);
+//        facebookGo.setDuration(2000);
+////        facebookGo.setFillAfter(true);
+//        facebook.startAnimation(facebookGo);
+//    }
 
     private void screenUP() {
         Animation alpha = new AlphaAnimation(0, 1);
