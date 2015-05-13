@@ -3,11 +3,8 @@ package io.zarda.elnerd.src;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
-import com.beardedhen.androidbootstrap.BootstrapThumbnail;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,20 +23,15 @@ import io.zarda.elnerd.view.Viewable;
 
 public class ViewManager {
 
-    private List<View> gameViewsList;
-    private List<View> homeViewsList;
-
     GameViewNotifier gvn;
     HomeViewNotifier hvn;
-
     HomeView homeView;
     GameView gameView;
-
     Viewable currentView;
-
     int bestPlayed;
     int allPlayed;
-
+    private List<View> gameViewsList;
+    private List<View> homeViewsList;
     private Context context;
 
     public ViewManager(final Context context) {
@@ -146,6 +138,22 @@ public class ViewManager {
         currentView = null;
     }
 
+    public void disableButtons() {
+        ((BootstrapButton) (gameViewsList.get(1))).setBootstrapButtonEnabled(false);
+        ((BootstrapButton) (gameViewsList.get(2))).setBootstrapButtonEnabled(false);
+        ((BootstrapButton) (gameViewsList.get(3))).setBootstrapButtonEnabled(false);
+        ((BootstrapButton) (gameViewsList.get(4))).setBootstrapButtonEnabled(false);
+    }
+
+    public void updateScore() {
+        ((MainActivity) context).updatePreferences();
+        BootstrapButton best = (BootstrapButton) ((Activity) context).findViewById(R.id.best_score);
+        BootstrapButton all = (BootstrapButton) ((Activity) context).findViewById(R.id.all_score);
+
+        best.setText("" + bestPlayed);
+        all.setText("" + allPlayed);
+    }
+
     public void showQuestion(Question question) {
         ((BootstrapButton) gameViewsList.get(0)).setText(question.getHeader());
         for (int i = 1; i < gameViewsList.size(); ++i) {
@@ -154,8 +162,11 @@ public class ViewManager {
         }
 
         gameView.setTime(6000);
-
 //        gameView.showNextQuestion();
+    }
+
+    public void setCurrentPlayed(int played) {
+        gameView.setCurrentPlay(played);
     }
 
     public void showSuccess(int correctButtonIndex) {
@@ -165,6 +176,10 @@ public class ViewManager {
     public void showFailure(int correctButtonIndex, int clickedButtonIndex) {
         gameView.showFailure((BootstrapButton) gameViewsList.get(correctButtonIndex + 1),
                 (BootstrapButton) gameViewsList.get(clickedButtonIndex + 1));
+    }
+
+    public void showFailure(int correctButtonIndex) {
+        gameView.showFailure((BootstrapButton) gameViewsList.get(correctButtonIndex + 1), null);
     }
 
     public boolean inHome() {

@@ -51,7 +51,6 @@ public class MainActivity extends FragmentActivity {
 
         sharedPreferencesManager.setKey(SharedMemory.LAST_SYNC_TIMESTAMP, 0L);
 
-
         lastAllPlayed = (int) sharedPreferencesManager.getKey(SharedMemory.ALL_PLAYED, 0);
         lastLongestPlayed = (int) sharedPreferencesManager.getKey(SharedMemory.LONGEST_PLAYED, 0);
 
@@ -59,9 +58,10 @@ public class MainActivity extends FragmentActivity {
         currentAllPlayed = 0;
 
         vm = new ViewManager(this);
-        vm.startHomeView();
 
-        setContentView(R.layout.activity_home);
+        updatePreferences();
+
+        vm.startHomeView();
     }
 
     @Override
@@ -107,12 +107,15 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void setNewQuestion() {
+        ++currentAllPlayed;
+        vm.setCurrentPlayed(currentAllPlayed);
         Random rand = new Random();
         int number = rand.nextInt(100);
         Collections.shuffle(choices);
         for (int i = 0; i < 4; i++) {
             if (Integer.parseInt(choices.get(i)) == number % 4) {
                 correctIndex = i;
+                break;
             }
         }
         Question question = new Question(number + "  %  4  =  ", choices, correctIndex);
@@ -127,28 +130,47 @@ public class MainActivity extends FragmentActivity {
 
             @Override
             public void onFinish() {
-                vm.endGameView();
-                vm.startHomeView();
+                vm.showFailure(correctIndex);
             }
         };
         timer.start();
     }
 
     public void answerClick(View v) {
-        timer.cancel();
-        ++currentAllPlayed;
-        int tag = Integer.parseInt((String)v.getTag());
-        if (tag == correctIndex) {
-            vm.showSuccess(correctIndex);
-            ++currentLongestPlayed;
-        } else {
-            vm.showFailure(correctIndex, tag);
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+            int tag = Integer.parseInt((String) v.getTag());
+            if (tag == correctIndex) {
+                vm.showSuccess(correctIndex);
+                ++currentLongestPlayed;
+            } else {
+                vm.showFailure(correctIndex, tag);
+            }
         }
     }
 
     public void playClick(View v) {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
         currentLongestPlayed = 0;
         vm.endHomeView();
+    }
+
+    public void goHome(View v) {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+        updatePreferences();
+        vm.endGameView();
+        vm.startHomeView();
+    }
+
+    public void endGame(View v) {
+        finish();
     }
 
     public void updatePreferences() {

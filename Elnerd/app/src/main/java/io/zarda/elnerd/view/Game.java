@@ -1,7 +1,5 @@
 package io.zarda.elnerd.view;
 
-import android.widget.Button;
-
 import com.beardedhen.androidbootstrap.BootstrapButton;
 
 /**
@@ -9,7 +7,12 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
  */
 public interface Game {
     void showSuccess(BootstrapButton correctButton);
+
     void showFailure(BootstrapButton correctButton, BootstrapButton wrongButton);
+
     void showNextQuestion();
+
     void setTime(int msTime);
+
+    void setCurrentPlay(int currentPlayed);
 }
