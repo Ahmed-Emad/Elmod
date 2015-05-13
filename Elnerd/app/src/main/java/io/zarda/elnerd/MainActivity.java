@@ -57,9 +57,9 @@ public class MainActivity extends FragmentActivity {
         currentLongestPlayed = 0;
         currentAllPlayed = 0;
 
-        vm = new ViewManager(this);
-
         updatePreferences();
+
+        vm = new ViewManager(this);
 
         vm.startHomeView();
     }
