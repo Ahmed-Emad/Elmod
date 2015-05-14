@@ -1,0 +1,191 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+
+    <LinearLayout
+        android:id="@+id/gameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/bar"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="30dp"
+            android:layout_gravity="top"
+            android:background="@color/gray"
+            />
+
+        <com.beardedhen.androidbootstrap.FontAwesomeText
+            android:id="@+id/current_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="32sp"
+        />
+
+        <com.beardedhen.androidbootstrap.FontAwesomeText
+            android:id="@+id/question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="Question"
+            android:textSize="75dp"
+            android:textColor="@color/bbutton_default"
+            bootstrapbutton:bb_icon_right="fa-question"
+            bootstrapbutton:bb_roundedCorners="true"
+            bootstrapbutton:bb_type="warning"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
+
+            <!--<com.beardedhen.androidbootstrap.BootstrapButton-->
+                <!--android:id="@+id/choice_one"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:onClick="answerClick"-->
+                <!--android:tag="0"-->
+                <!--android:text=" answer = 0 "-->
+                <!--android:textSize="50dp"-->
+                <!--bootstrapbutton:bb_roundedCorners="true"-->
+                <!--bootstrapbutton:bb_type="default" />-->
+
+            <com.cengalabs.flatui.views.FlatButton
+                android:id="@+id/choice_one"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:onClick="answerClick"
+                android:tag="0"
+                android:text=" answer = 0 "
+                android:textSize="50dp"
+                flatui:fl_fontFamily="theboldfont.ttf"
+                flatui:fl_fontWeight="bold"
+                flatui:fl_textAppearance="fl_dark"
+                flatui:fl_blockButtonEffectHeight="6dp" />
+
+            <!--<com.beardedhen.androidbootstrap.BootstrapButton-->
+                <!--android:id="@+id/choice_two"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:onClick="answerClick"-->
+                <!--android:tag="1"-->
+                <!--android:text=" answer = 1 "-->
+                <!--android:textSize="50dp"-->
+                <!--bootstrapbutton:bb_roundedCorners="true"-->
+                <!--bootstrapbutton:bb_type="default" />-->
+
+            <com.cengalabs.flatui.views.FlatButton
+                android:id="@+id/choice_two"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:onClick="answerClick"
+                android:tag="1"
+                android:text=" answer = 1 "
+                android:textSize="50dp"
+                flatui:fl_fontFamily="theboldfont.ttf"
+                flatui:fl_fontWeight="bold"
+                flatui:fl_textAppearance="fl_dark"
+                flatui:fl_blockButtonEffectHeight="6dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
+
+            <!--<com.beardedhen.androidbootstrap.BootstrapButton-->
+                <!--android:id="@+id/choice_three"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:onClick="answerClick"-->
+                <!--android:tag="2"-->
+                <!--android:text=" answer = 2 "-->
+                <!--android:textSize="50dp"-->
+                <!--bootstrapbutton:bb_roundedCorners="true"-->
+                <!--bootstrapbutton:bb_type="default" />-->
+
+            <com.cengalabs.flatui.views.FlatButton
+                android:id="@+id/choice_three"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:onClick="answerClick"
+                android:tag="2"
+                android:text=" answer = 2 "
+                android:textSize="50dp"
+                flatui:fl_fontFamily="theboldfont.ttf"
+                flatui:fl_fontWeight="bold"
+                flatui:fl_textAppearance="fl_dark"
+                flatui:fl_blockButtonEffectHeight="6dp" />
+
+
+
+            <!--<com.beardedhen.androidbootstrap.BootstrapButton-->
+                <!--android:id="@+id/choice_four"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:onClick="answerClick"-->
+                <!--android:tag="3"-->
+                <!--android:text=" answer = 3 "-->
+                <!--android:textSize="50dp"-->
+                <!--bootstrapbutton:bb_roundedCorners="true"-->
+                <!--bootstrapbutton:bb_type="default" />-->
+
+            <com.cengalabs.flatui.views.FlatButton
+                android:id="@+id/choice_four"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:onClick="answerClick"
+                android:tag="3"
+                android:text=" answer = 3 "
+                android:textSize="50dp"
+                flatui:fl_fontFamily="theboldfont.ttf"
+                flatui:fl_fontWeight="bold"
+                flatui:fl_textAppearance="fl_dark"
+                flatui:fl_blockButtonEffectHeight="6dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
