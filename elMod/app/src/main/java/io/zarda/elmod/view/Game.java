@@ -1,6 +1,5 @@
 package io.zarda.elmod.view;
 
-import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.cengalabs.flatui.views.FlatButton;
 
 /**

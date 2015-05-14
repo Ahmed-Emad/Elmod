@@ -5,12 +5,7 @@ import android.content.Context;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import java.util.List;
 

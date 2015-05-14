@@ -3,8 +3,6 @@ package io.zarda.elmod.src;
 import android.content.Context;
 import android.os.Vibrator;
 
-import io.zarda.elmod.MainActivity;
-
 /**
  * Created by atef & emad on 4 May, 2015.
  */
