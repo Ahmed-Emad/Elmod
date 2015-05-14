@@ -1,5 +1,8 @@
 package io.zarda.elmod.src;
 
+import android.content.Context;
+import android.os.Vibrator;
+
 import io.zarda.elmod.MainActivity;
 
 /**
@@ -8,9 +11,11 @@ import io.zarda.elmod.MainActivity;
 public class GameViewNotifier {
 
     private ViewManager vm;
+    private Context context;
 
-    public GameViewNotifier(ViewManager vm, MainActivity ma) {
+    public GameViewNotifier(ViewManager vm, Context context) {
         this.vm = vm;
+        this.context = context;
     }
 
     public void notifyShowSuccessFinished() {
@@ -19,6 +24,8 @@ public class GameViewNotifier {
     }
 
     public void notifyShowFailureFinished() {
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(500);
         vm.updateScore();
         vm.disableButtons();
     }

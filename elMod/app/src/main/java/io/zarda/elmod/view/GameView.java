@@ -29,6 +29,7 @@ import io.zarda.elmod.src.GameViewNotifier;
 /**
  * Created by atef & emad on 4 May, 2015.
  */
+
 public class GameView implements Viewable, Game {
 
     Context context;
@@ -65,6 +66,11 @@ public class GameView implements Viewable, Game {
         String[] colors = {"#2ecc71", "#3498db", "#9b59b6", "#e67e22", "#e74c3c"};
         int color = new Random().nextInt(5);
         gameLayout.setBackgroundColor(Color.parseColor(colors[color]));
+
+//        View mainLayout = ((Activity) context).findViewById(R.id.frame_layout);
+//        Animation goDown = new TranslateAnimation(0, 0, 0, screenHeight);
+//        goDown.setDuration(500);
+//        mainLayout.startAnimation(goDown);
     }
 
     @Override
@@ -84,7 +90,10 @@ public class GameView implements Viewable, Game {
 
     @Override
     public void endView() {
-
+//        View mainLayout = ((Activity) context).findViewById(R.id.frame_layout);
+//        Animation goUp = new TranslateAnimation(0, 0, screenHeight, 0);
+//        goUp.setDuration(500);
+//        mainLayout.startAnimation(goUp);
     }
 
     @Override

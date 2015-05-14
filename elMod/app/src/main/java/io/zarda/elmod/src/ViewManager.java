@@ -77,7 +77,7 @@ public class ViewManager {
 //
 //        gameViewsList = Collections.unmodifiableList(gameViewsArray);
 
-        gvn = new GameViewNotifier(this, (MainActivity) context);
+        gvn = new GameViewNotifier(this, context);
         hvn = new HomeViewNotifier(this);
 
         homeView = new HomeView(hvn);
