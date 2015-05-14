@@ -1,6 +1,6 @@
-package io.zarda.elnerd.src;
+package io.zarda.elmod.src;
 
-import io.zarda.elnerd.MainActivity;
+import io.zarda.elmod.MainActivity;
 
 /**
  * Created by atef & emad on 4 May, 2015.

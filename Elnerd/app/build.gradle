@@ -31,4 +31,5 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.beardedhen:androidbootstrap:1.2.1'
+    compile 'com.github.eluleci:flatui:3.0.0'
 }

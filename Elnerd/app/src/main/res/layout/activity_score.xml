@@ -1,122 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
     xmlns:fontawesometext="http://schemas.android.com/apk/res-auto"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@mipmap/score2"
     android:orientation="vertical">
 
-    <com.beardedhen.androidbootstrap.FontAwesomeText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="30dp"
-        android:layout_marginBottom="40dp"
-        android:textColor="@color/bbutton_inverse"
-        android:textSize="90sp"
-        fontawesometext:fa_icon="fa-thumbs-o-down" />
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="10sp"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5sp"
-            android:orientation="horizontal">
-
-            <com.beardedhen.androidbootstrap.FontAwesomeText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:textColor="@color/bbutton_success"
-                android:textSize="50sp"
-                fontawesometext:fa_icon="fa-trophy" />
-
-            <com.beardedhen.androidbootstrap.BootstrapButton
-                android:id="@+id/best_score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:text="0"
-                bootstrapbutton:bb_type="success" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5sp"
-            android:orientation="horizontal">
-
-            <com.beardedhen.androidbootstrap.BootstrapButton
-                android:id="@+id/all_score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:text="0"
-                bootstrapbutton:bb_type="danger" />
-
-            <com.beardedhen.androidbootstrap.FontAwesomeText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:textColor="@color/bbutton_danger"
-                android:textSize="50sp"
-                fontawesometext:fa_icon="fa-gamepad" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10sp"
-        android:orientation="horizontal">
+        android:background="@color/asphalt"
+        android:orientation="vertical">
 
         <com.beardedhen.androidbootstrap.FontAwesomeText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="15dp"
-            android:onClick="playClick"
-            android:textColor="@color/bbutton_success"
-            android:textSize="40sp"
-            fontawesometext:fa_icon="fa-repeat" />
-
-        <com.beardedhen.androidbootstrap.FontAwesomeText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="15dp"
-            android:onClick="goHome"
-            android:textColor="@color/bbutton_warning"
-            android:textSize="40sp"
-            fontawesometext:fa_icon="fa-home" />
-
-        <com.beardedhen.androidbootstrap.FontAwesomeText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="15dp"
-            android:onClick="endGame"
+            android:layout_margin="30dp"
+            android:layout_marginBottom="40dp"
             android:textColor="@color/bbutton_default"
-            android:textSize="40sp"
-            fontawesometext:fa_icon="fa-sign-out" />
+            android:textSize="80dp"
+            fontawesometext:fa_icon="fa-frown-o" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <com.beardedhen.androidbootstrap.FontAwesomeText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/bbutton_success"
+                    android:textSize="50dp"
+                    fontawesometext:fa_icon="fa-trophy" />
+
+                <com.beardedhen.androidbootstrap.BootstrapButton
+                    android:id="@+id/best_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:text="0"
+                    bootstrapbutton:bb_type="success" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <com.beardedhen.androidbootstrap.BootstrapButton
+                    android:id="@+id/all_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:text="0"
+                    bootstrapbutton:bb_type="danger" />
+
+                <com.beardedhen.androidbootstrap.FontAwesomeText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/bbutton_danger"
+                    android:textSize="50dp"
+                    fontawesometext:fa_icon="fa-gamepad" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="horizontal">
+
+        <com.cengalabs.flatui.views.FlatButton
+            android:id="@+id/repeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:onClick="playClick"
+            android:textSize="15dp"
+            android:text="Repeat"
+            flatui:fl_textAppearance="fl_light"
+            flatui:fl_blockButtonEffectHeight="5dp" />
+
+        <com.cengalabs.flatui.views.FlatButton
+            android:id="@+id/home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:onClick="goHome"
+            android:text="Home"
+            android:textSize="15dp"
+            flatui:fl_textAppearance="fl_light"
+            flatui:fl_blockButtonEffectHeight="5dp" />
+
+    </LinearLayout>
 
 </LinearLayout>

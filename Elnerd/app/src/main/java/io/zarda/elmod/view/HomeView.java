@@ -1,4 +1,4 @@
-package io.zarda.elnerd.view;
+package io.zarda.elmod.view;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,8 +6,8 @@ import android.view.View;
 
 import java.util.List;
 
-import io.zarda.elnerd.R;
-import io.zarda.elnerd.src.HomeViewNotifier;
+import io.zarda.elmod.R;
+import io.zarda.elmod.src.HomeViewNotifier;
 
 /**
  * Created by atef & emad on 4 May, 2015.

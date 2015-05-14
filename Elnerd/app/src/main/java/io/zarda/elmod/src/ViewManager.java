@@ -1,21 +1,26 @@
-package io.zarda.elnerd.src;
+package io.zarda.elmod.src;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.View;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.beardedhen.androidbootstrap.FontAwesomeText;
+import com.cengalabs.flatui.FlatUI;
+import com.cengalabs.flatui.views.FlatButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import io.zarda.elnerd.MainActivity;
-import io.zarda.elnerd.R;
-import io.zarda.elnerd.model.Question;
-import io.zarda.elnerd.view.GameView;
-import io.zarda.elnerd.view.HomeView;
-import io.zarda.elnerd.view.Viewable;
+import io.zarda.elmod.MainActivity;
+import io.zarda.elmod.R;
+import io.zarda.elmod.model.Constants;
+import io.zarda.elmod.model.Question;
+import io.zarda.elmod.view.GameView;
+import io.zarda.elmod.view.HomeView;
+import io.zarda.elmod.view.Viewable;
 
 /**
  * Created by atef & emad on 4 May, 2015.
@@ -32,6 +37,7 @@ public class ViewManager {
     int allPlayed;
     private List<View> gameViewsList;
     private List<View> homeViewsList;
+    private List<FlatButton> buttonsViewList;
     private Context context;
 
     public ViewManager(final Context context) {
@@ -112,23 +118,27 @@ public class ViewManager {
         gameView.startView();
         currentView = gameView;
         ArrayList<View> gameViewsArray = new ArrayList<>();
-        BootstrapButton questiontButton = (BootstrapButton) ((Activity) context).findViewById(
+        ArrayList<FlatButton> buttonsViewsArray = new ArrayList<>();
+
+        FontAwesomeText questiontButton = (FontAwesomeText) ((Activity) context).findViewById(
                 R.id.question);
-        BootstrapButton choice1Button = (BootstrapButton) ((Activity) context).findViewById(
+        FlatButton choice1Button = (FlatButton) ((Activity) context).findViewById(
                 R.id.choice_one);
-        BootstrapButton choice2Button = (BootstrapButton) ((Activity) context).findViewById(
+        FlatButton choice2Button = (FlatButton) ((Activity) context).findViewById(
                 R.id.choice_two);
-        BootstrapButton choice3Button = (BootstrapButton) ((Activity) context).findViewById(
+        FlatButton choice3Button = (FlatButton) ((Activity) context).findViewById(
                 R.id.choice_three);
-        BootstrapButton choice4Button = (BootstrapButton) ((Activity) context).findViewById(
+        FlatButton choice4Button = (FlatButton) ((Activity) context).findViewById(
                 R.id.choice_four);
 
         gameViewsArray.add(questiontButton);
-        gameViewsArray.add(choice1Button);
-        gameViewsArray.add(choice2Button);
-        gameViewsArray.add(choice3Button);
-        gameViewsArray.add(choice4Button);
+        buttonsViewsArray.add(choice1Button);
+        buttonsViewsArray.add(choice2Button);
+        buttonsViewsArray.add(choice3Button);
+        buttonsViewsArray.add(choice4Button);
+
         gameViewsList = Collections.unmodifiableList(gameViewsArray);
+        buttonsViewList = Collections.unmodifiableList(buttonsViewsArray);
 
         ((MainActivity) context).setNewQuestion();
     }
@@ -139,10 +149,10 @@ public class ViewManager {
     }
 
     public void disableButtons() {
-        ((BootstrapButton) (gameViewsList.get(1))).setBootstrapButtonEnabled(false);
-        ((BootstrapButton) (gameViewsList.get(2))).setBootstrapButtonEnabled(false);
-        ((BootstrapButton) (gameViewsList.get(3))).setBootstrapButtonEnabled(false);
-        ((BootstrapButton) (gameViewsList.get(4))).setBootstrapButtonEnabled(false);
+        ((FlatButton) (buttonsViewList.get(0))).setEnabled(false);
+        ((FlatButton) (buttonsViewList.get(1))).setEnabled(false);
+        ((FlatButton) (buttonsViewList.get(2))).setEnabled(false);
+        ((FlatButton) (buttonsViewList.get(3))).setEnabled(false);
     }
 
     public void updateScore() {
@@ -154,32 +164,40 @@ public class ViewManager {
         all.setText("" + allPlayed);
     }
 
-    public void showQuestion(Question question) {
-        ((BootstrapButton) gameViewsList.get(0)).setText(question.getHeader());
-        for (int i = 1; i < gameViewsList.size(); ++i) {
-            ((BootstrapButton) gameViewsList.get(i)).setText(
-                    " answer = " + question.getChoices().get(i - 1));
+    public void showQuestion(Question question, boolean isFirst) {
+        Typeface type = Typeface.createFromAsset(context.getAssets(),"fonts/theboldfont.ttf");
+        ((FontAwesomeText) gameViewsList.get(0)).setText(question.getHeader());
+        ((FontAwesomeText) gameViewsList.get(0)).setTypeface(type);
+
+        for (int i = 0; i < buttonsViewList.size(); ++i) {
+            (buttonsViewList.get(i)).setText("" + question.getChoices().get(i));
+            (buttonsViewList.get(i)).setTypeface(type);
+            (buttonsViewList.get(i)).getAttributes().setTheme(FlatUI.SNOW, context.getResources());
+            (buttonsViewList.get(i)).setTextColor(R.color.black);
         }
 
-        gameView.setTime(6000);
-//        gameView.showNextQuestion();
+        if (!isFirst) {
+            gameView.setTime(Constants.QuestionLimit);
+        }
     }
 
     public void setCurrentPlayed(int played) {
-        gameView.setCurrentPlay(played);
+        gameView.setCurrentPlay(played - 1);
     }
 
     public void showSuccess(int correctButtonIndex) {
-        gameView.showSuccess((BootstrapButton) gameViewsList.get(correctButtonIndex + 1));
+        gameView.setTime(Constants.QuestionLimit);
+        gameView.showSuccess(buttonsViewList.get(correctButtonIndex));
     }
 
     public void showFailure(int correctButtonIndex, int clickedButtonIndex) {
-        gameView.showFailure((BootstrapButton) gameViewsList.get(correctButtonIndex + 1),
-                (BootstrapButton) gameViewsList.get(clickedButtonIndex + 1));
+        gameView.showFailure(buttonsViewList.get(correctButtonIndex),
+                buttonsViewList.get(clickedButtonIndex));
     }
 
     public void showFailure(int correctButtonIndex) {
-        gameView.showFailure((BootstrapButton) gameViewsList.get(correctButtonIndex + 1), null);
+        gameView.setTime(Constants.QuestionLimit);
+        gameView.showFailure(buttonsViewList.get(correctButtonIndex), null);
     }
 
     public boolean inHome() {

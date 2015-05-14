@@ -1,11 +1,11 @@
-package io.zarda.elnerd.src;
+package io.zarda.elmod.src;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import java.lang.reflect.Type;
 
-import io.zarda.elnerd.model.Constants;
+import io.zarda.elmod.model.Constants;
 
 /**
  * Created by Ahmed Atef on 12/05/15.

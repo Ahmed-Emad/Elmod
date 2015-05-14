@@ -1,4 +1,4 @@
-package io.zarda.elnerd.model;
+package io.zarda.elmod.model;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,7 @@ public class Question {
     private String header;
     private ArrayList<String> choices;
     private int correctIndex;
+
 
     public Question(String header, ArrayList<String> choices, int correctIndex) {
         this.header = header;
@@ -31,3 +32,4 @@ public class Question {
     }
 
 }
+

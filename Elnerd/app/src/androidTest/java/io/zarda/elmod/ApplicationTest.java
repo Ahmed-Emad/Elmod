@@ -1,4 +1,4 @@
-package io.zarda.elnerd;
+package io.zarda.elmod;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

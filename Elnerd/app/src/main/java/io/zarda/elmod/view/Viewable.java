@@ -1,4 +1,4 @@
-package io.zarda.elnerd.view;
+package io.zarda.elmod.view;
 
 import android.content.Context;
 import android.view.View;

@@ -1,12 +1,9 @@
-package io.zarda.elnerd;
+package io.zarda.elmod;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;
