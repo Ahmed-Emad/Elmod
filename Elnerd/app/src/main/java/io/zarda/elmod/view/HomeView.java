@@ -3,6 +3,10 @@ package io.zarda.elmod.view;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import java.util.List;
 
@@ -15,6 +19,9 @@ import io.zarda.elmod.src.HomeViewNotifier;
 public class HomeView implements Viewable {
 
     HomeViewNotifier hvn;
+
+    Button play;
+
     private Context context;
 
     public HomeView(HomeViewNotifier hvn) {
@@ -29,6 +36,9 @@ public class HomeView implements Viewable {
     @Override
     public void startView() {
         ((Activity) context).setContentView(R.layout.activity_home);
+
+        play = (Button) ((Activity) context).findViewById(R.id.play);
+        play.setBackground(context.getResources().getDrawable(R.drawable.pb));
     }
 
     @Override

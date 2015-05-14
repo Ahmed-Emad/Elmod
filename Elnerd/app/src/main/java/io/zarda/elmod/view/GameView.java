@@ -110,7 +110,9 @@ public class GameView implements Viewable, Game {
             wrongButton.getAttributes().setTheme(FlatUI.BLOOD, context.getResources());
         }
 
-        bar.getAnimation().cancel();
+        if (bar != null) {
+            bar.getAnimation().cancel();
+        }
 
         final FrameLayout layout = (FrameLayout) ((Activity) context).findViewById(R.id.frame_layout);
         final LayoutInflater inflater = ((Activity) context).getLayoutInflater();

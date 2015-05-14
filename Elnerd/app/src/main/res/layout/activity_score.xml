@@ -20,11 +20,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="30dp"
-            android:layout_marginBottom="40dp"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
             android:textColor="@color/bbutton_default"
-            android:textSize="80dp"
+            android:textSize="70dp"
             fontawesometext:fa_icon="fa-frown-o" />
+
+        <com.cengalabs.flatui.views.FlatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="انتهت اللعبة"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            flatui:fl_fontFamily="theboldfont.ttf"
+            flatui:fl_fontWeight="bold"
+            flatui:fl_textAppearance="fl_dark" />
 
         <LinearLayout
             android:layout_width="wrap_content"
