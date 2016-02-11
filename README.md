@@ -1,2 +1,2 @@
-# Elnerd
-Andriod application whose main target is to raise awarness, and make people read..
+## Elmod
+Andriod application whose main target is to make people faster in Math calculations..
